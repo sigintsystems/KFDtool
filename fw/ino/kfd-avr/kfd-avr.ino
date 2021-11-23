@@ -5,23 +5,65 @@
 #include "ControlOpCodes.h"
 #include "Versions.h"
 #include "UID.h"
+#include "P25.h"
+#include "HMI.h"
+#include <SPI.h>
+#include <Wire.h>
+#include "Adafruit_GFX.h"
+#include "Adafruit_SSD1306.h"
 
 uint16_t cmdCount;
 uint8_t cmdData[128];
 uint16_t rxReady;
 uint8_t rxTemp;
+uint8_t mode;
 
 void setup()
 {
+    // begin in host serial mode (mode 1)
+    // this ensures if you don't have a screen, or don't want to fiddle with the menus, you can still use it with a PC
+    mode = 2;
+
     halInit();
     spConnect();
 
     twiInit();
+    hmiInitDisplay();
+    hmiClearDisplay();
+    hmiDoSplash();
 
-    halLed1On();
+    halDelayMs(2000);
+    hmiRedrawMenus(mode); // initially draw for what mode we are in
+
+    halActLedOn();
 }
 
 void loop()
+{
+    if (mode == 0) // menu mode
+    {
+        doMainMenu();
+    }
+    else if (mode == 1) // serial mode, the default
+    {
+        doSerialMode();
+    }
+    else if (mode == 2) // standalone mode
+    {
+        doAutoZeroizeMode();
+    }
+
+    //hmiCheckButtons(); // see if we've pressed a button
+    //hmiUpdateMode(mode); // update the mode if necessary
+
+}
+
+void doMainMenu()
+{
+    //
+}
+
+void doSerialMode()
 {
     cmdCount = spRxData(cmdData);
 
@@ -315,7 +357,7 @@ void loop()
 
                 halDelayMs(3000); // wait 3 seconds
 
-                halLed1Off();
+                halActLedOff();
 
                 halEnterBsl();
             }
@@ -345,7 +387,7 @@ void loop()
 
                 halDelayMs(3000); // wait 3 seconds
 
-                halLed1Off();
+                halActLedOff();
 
                 halReset();
             }
@@ -449,5 +491,21 @@ void loop()
         bcstData[2] = rxTemp;
 
         spTxDataBack(bcstData, sizeof(bcstData));
+    }
+}
+
+void doAutoZeroizeMode()
+{
+    // wait for data
+    rxReady = twiReceiveByte(&rxTemp);
+
+    if (rxReady == 1)
+    {
+        // the radio blasts a byte when it goes into keyload mode
+        if (rxTemp == 0x8B)
+        {
+            halDelayMs(100); // give the line and radio a sec to chill
+            P25ZeroizeKeys();
+        }
     }
 }
