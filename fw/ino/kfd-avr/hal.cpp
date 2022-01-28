@@ -180,20 +180,3 @@ void halSenTxDisc(void)
 /**
  * END KFD macros
  */
-
-/**
- * BEGIN BUTTON macros
- */
-
-#define BUTTON_UP_PRESSED digitalRead(UP_BUTTON_PIN) == 0
-#define BUTTON_UP_RELEASED digitalRead(UP_BUTTON_PIN) == 1
-
-#define BUTTON_DOWN_PRESSED digitalRead(DOWN_BUTTON_PIN) == 0
-#define BUTTON_DOWN_RELEASED digitalRead(DOWN_BUTTON_PIN) == 1
-
-#define BUTTON_ENTER_PRESSED digitalRead(ENTER_BUTTON_PIN) == 0
-#define BUTTON_ENTER_RELEASED digitalRead(ENTER_BUTTON_PIN) == 1
-
-/**
- * END BUTTON macros
- */

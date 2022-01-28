@@ -1,5 +1,5 @@
 #include "SerialProtocol.h"
-#include "hal.h"
+#include "../hal.h"
 #include <Arduino.h>
 
 
@@ -16,6 +16,9 @@ uint8_t inData[128];
 void spConnect(void)
 {
     Serial.begin(115200);
+    while (!Serial) {
+      ;
+    }
 }
 
 void spDisconnect(void)
@@ -29,6 +32,7 @@ uint16_t spRxData(uint8_t* outData)
 {
   uint8_t inByte;
     while (Serial.available() > 0) {
+        halActLedOff();
         inByte = Serial.read();
 
         // reset the buffer if we have a start of message flag coming in

@@ -30,10 +30,12 @@
 #define READ_MODEL_ID 0x04
 #define READ_HW_REV 0x05
 #define READ_SER_NUM 0x06
+#define READ_KEY_INFO 0x07
 
 /* WRITE OPCODES */
 #define WRITE_MDL_REV 0x01
 #define WRITE_SER 0x02
+#define WRITE_KEY 0x03
 
 /* ERROR OPCODES */
 #define ERR_OTHER 0x00

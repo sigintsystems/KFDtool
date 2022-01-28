@@ -5,6 +5,10 @@
 
 void twiInit(void);
 
+void twiPause(void);
+
+void twiResume(void);
+
 uint8_t twiSelfTest(void);
 
 uint16_t twiReceiveByte(uint8_t *c);
