@@ -53,7 +53,7 @@ const char *menuItems[] =
     "Zeroize Device",
 };
 
-uint8_t current_mode = MODE_MAIN_MENU; // start in main menu
+uint8_t current_mode = MODE_PC; // start in main menu
 
 DisplaySSD1306_128x64_I2C display(-1);
 

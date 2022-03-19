@@ -15,7 +15,7 @@
 #define CLEAR_INTERRUPTS EIFR=2
 #elif defined(__AVR_ATmega32U4__)
 // pin 3 is INT0
-#define CLEAR_INTERRUPTS EIFR=1
+#define CLEAR_INTERRUPTS EIFR=4
 #elif defined(__AVR_ATmega2560__)
 // WIP
 #define CLEAR_INTERRUPTS EIFR=2
