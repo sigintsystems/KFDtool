@@ -1,6 +1,8 @@
 # KFD-AVR
 
-A fork of the amazing [KFDTool AVR port](https://github.com/omahacommsys/KFDtool) by Omaha Comms, mostly to add the 3d enclosure files. (Warning, I have no idea how to use GitHub, please use the original repository for the firmware/software as there's a good chance this is out of date or I screwed something up)
+A fork of the amazing [KFDTool AVR port](https://github.com/omahacommsys/KFDtool) by Omaha Comms, mostly to add the 3d enclosure files. 
+
+(Warning, I have no idea how to use GitHub, please use the original repository for the firmware/software as there's a good chance this is out of date or I screwed something up)
 
 A fork of the amazing [KFDTool](https://github.com/KFDTool/KFDTool) software for an Arduino, plus schematics and board files for a shield.
 
